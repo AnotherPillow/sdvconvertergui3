@@ -1,0 +1,6 @@
+[submodule "src/lib/external/tbin"]
+	path = src/lib/external/tbin
+	url = https://github.com/AnotherPillow/tbin.js
+[submodule "src/lib/extern/tbin"]
+	path = src/lib/extern/tbin
+	url = https://github.com/anotherpillow/Tbin
