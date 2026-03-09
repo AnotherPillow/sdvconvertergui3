@@ -240,8 +240,52 @@ export default async function getTmxFromTbin(bytes: Uint8Array): Promise<string>
             )
 
             const layer = new tBINLayer(name, widthTiles, heightTiles, visible, tileWidthPixels, tileHeightPixels)
+
+            /// AAAAAAAAAAAAAAA
+            const l_outCountPtr = mod._malloc(4);
+
+            const l_listPtr = mod.ccall(
+                "map_layer_prop_keys_list",
+                "number",
+                ["number", "number", "number"],
+                [mapPtr, l_outCountPtr, i]
+            );
+
+            const l_count = mod.getValue(l_outCountPtr, "i32");
+            mod._free(l_outCountPtr);
+
+            const l_keys = [];
+            l_keys.length = l_count;
+
+            // listPtr is a char**
+            for (let j = 0; j < l_count; j++) {
+                const strPtr = mod.getValue(l_listPtr + j * 4, "i32");
+                l_keys[j] = mod.UTF8ToString(strPtr);
+            }
+
+            // free the list & strings allocated 
+            mod.ccall("map_free_string_list", null, ["number", "number"], [l_listPtr, l_count]);
+
+            const layerProperties: Map<string, boolean | number | string> = new Map()
+
+            for (const key of l_keys) {
+                console.log(`getting value for layer ${key}`)
+                const valPtr = mod.ccall(
+                    "map_layer_prop_get_value",
+                    "number",
+                    ["number", "string", "number"],
+                    [mapPtr, key, i]
+                );
+
+                const val = mod.UTF8ToString(valPtr);
+                console.log(`layer prop with ${key}=${val}`)
+                layerProperties.set(key, val)
+                console.log(`layer property ${key}->${val}`)
+            }
+            layer.properties = layerProperties
+
             // layer.tiles
-            // layer.properties
+
             tbjs.tiles.layers.push(layer)
         } catch (e) {
             console.warn(`failed creating layer ${i}`, e)
