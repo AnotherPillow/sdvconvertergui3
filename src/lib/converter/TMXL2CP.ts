@@ -124,7 +124,8 @@ export default class TMXL2CP extends BaseConverter {
                     this.outputContent.Changes.push({
                         Action: 'Load',
                         Target: `Maps/Custom_${mapname}`,
-                        FromFile: `assets/${map.file.replace(/tbin$/, 'tmx')}`
+                        FromFile: map.file.replace(/tbin$/, 'tmx'),
+                        // FromFile: `assets/${map.file.replace(/tbin$/, 'tmx')}`
                     })
 
                     this.outputContent.Changes.push({
@@ -133,9 +134,9 @@ export default class TMXL2CP extends BaseConverter {
                         Entries: {
                             [`Custom_${mapname}`]: {
                                 DisplayName: `Custom_${mapname}`,
-                                DefaultArrivalTile: [0, 0],
+                                DefaultArrivalTile: {X: 0, Y: 0},
                                 CreateOnLoad: {
-                                    MapMath: `Maps/Custom_${mapname}`,
+                                    MapPath: `Maps/Custom_${mapname}`,
                                 },
                                 FormerLocationNames: [ mapname ]
                             }
