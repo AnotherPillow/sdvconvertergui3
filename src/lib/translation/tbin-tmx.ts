@@ -164,21 +164,21 @@ export default async function getTmxFromTbin(bytes: Uint8Array, customMapNames: 
                 [mapPtr, i]
             )
 
-            const sheetPixelWidth = mod.ccall(
-                "map_tilesheets_image_px_x",
+            const sheetTilesWidth = mod.ccall(
+                "map_tilesheets_image_tiles_x",
                 "number",
                 ["number", "number"],
                 [mapPtr, i]
             )
             
-            const sheetPixelHeight = mod.ccall(
-                "map_tilesheets_image_px_y",
+            const sheetTilesHeight = mod.ccall(
+                "map_tilesheets_image_tiles_y",
                 "number",
                 ["number", "number"],
                 [mapPtr, i]
-            )
+            ) 
 
-            const sheet = new tBINTilesheet(displayname, filename, tileProperties, tileHeight, tileWidth, sheetPixelWidth, sheetPixelHeight);
+            const sheet = new tBINTilesheet(displayname, filename, tileProperties, tileHeight, tileWidth, sheetTilesWidth * 16, sheetTilesHeight * 16);
 
             tbjs.tilesheets.tilesheets.push(sheet)
         }
