@@ -295,7 +295,7 @@ export default async function getTmxFromTbin(bytes: Uint8Array, customMapNames: 
                     layerTiles[tY][tX] = null
                     
                     // commented because pretty sure causing perf issues
-                    console.log(`getting tile index for tile ${t} on layer ${i}`)
+                    // console.log(`getting tile index for tile ${t} on layer ${i}`)
                     const tileIndex = mod.ccall(
                         "map_layer_tile_get_index",
                         "number",

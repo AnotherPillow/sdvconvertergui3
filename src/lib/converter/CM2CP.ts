@@ -7,7 +7,7 @@ import BaseConverter from "./base";
 
 export default class CM2CP extends BaseConverter {
     constructor(public manifest: Manifest, public files: File[]) {
-        super(manifest, files, 'platonymous.custommusic', 'CM2CP')
+        super(manifest, files, 'platonymous.custommusic', 'Pathoschild.ContentPatcher', 'CM2CP')
     }
 
     convert() {

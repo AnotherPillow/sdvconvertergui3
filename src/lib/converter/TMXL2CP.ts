@@ -31,7 +31,7 @@ const inventoryTypeToQualified = (type: string) => {
 export default class TMXL2CP extends BaseConverter {
 
     constructor(public manifest: Manifest, public files: File[]) {
-        super(manifest, files, 'platonymous.tmxloader', 'TMXL2CP')
+        super(manifest, files, 'platonymous.tmxloader', 'Pathoschild.ContentPatcher', 'TMXL2CP')
     }
 
     private _hasRun: boolean = false;
@@ -48,7 +48,7 @@ export default class TMXL2CP extends BaseConverter {
             'Unreadable content.json selected!') as any | null | undefined
             if (!content ) return null
 
-            const customMapNames: string[] = []
+            const customMapNames: string[]   = []
 
             if (content.festivalSpots) {
                 for (const spot of content.festivalSpots) {

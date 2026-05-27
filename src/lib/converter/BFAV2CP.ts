@@ -41,7 +41,7 @@ const splitAnimalString = (data: string) => {
 
 export default class BFAV2CP extends BaseConverter {
     constructor(public manifest: Manifest, public files: File[]) {
-        super(manifest, files, 'paritee.betterfarmanimalvariety', 'BFAV2CP')
+        super(manifest, files, 'paritee.betterfarmanimalvariety', 'Pathoschild.ContentPatcher', 'BFAV2CP')
     }
 
     convert() {

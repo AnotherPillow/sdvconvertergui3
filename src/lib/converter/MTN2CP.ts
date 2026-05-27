@@ -57,7 +57,7 @@ const HOUSE_LAYOUTS_PROPS = [
 
 export default class MTN2CP extends BaseConverter {
     constructor(public manifest: Manifest, public files: File[]) {
-        super(manifest, files, 'sgtpickles.mtn', 'MTN2CP')
+        super(manifest, files, 'sgtpickles.mtn', 'Pathoschild.ContentPatcher', 'MTN2CP')
     }
 
     convert() {
