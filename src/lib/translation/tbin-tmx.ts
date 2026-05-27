@@ -317,7 +317,45 @@ export default async function getTmxFromTbin(bytes: Uint8Array, customMapNames: 
                     // null tiles are just empty im pretty sure!
                     // if (tileSheet == "" || tileSheet.startsWith('_')) console.warn(`failed to get tilesheet for ${t} on ${i} (${layer.name}) - received '${tileSheet}'`)
 
-                    if (tileIndex != -1 && tileSheet) layerTiles[tY][tX] = new tBINStaticTile(tileIndex, blendMode, tileSheet)
+                    if (tileIndex != -1 && tileSheet) {
+                        const staticTile = new tBINStaticTile(tileIndex, blendMode, tileSheet)
+
+                        const tp_outCountPtr = mod._malloc(4);
+
+                        const tp_listPtr = mod.ccall(
+                            "map_layer_tile_prop_keys_list",
+                            "number",
+                            ["number", "number", "number", "number"],
+                            [mapPtr, tp_outCountPtr, i, t]
+                        );
+
+                        const tp_count = mod.getValue(tp_outCountPtr, "i32");
+                        mod._free(tp_outCountPtr);
+
+                        const tp_keys: string[] = [];
+                        tp_keys.length = tp_count;
+
+                        for (let k = 0; k < tp_count; k++) {
+                            const strPtr = mod.getValue(tp_listPtr + k * 4, "i32");
+                            tp_keys[k] = mod.UTF8ToString(strPtr);
+                        }
+
+                        mod.ccall("map_free_string_list", null, ["number", "number"], [tp_listPtr, tp_count]);
+
+                        for (const key of tp_keys) {
+                            const valPtr = mod.ccall(
+                                "map_layer_tile_prop_get_value",
+                                "number",
+                                ["number", "string", "number", "number"],
+                                [mapPtr, key, i, t]
+                            );
+
+                            const val = mod.UTF8ToString(valPtr);
+                            staticTile.properties.set(key, val);
+                        }
+
+                        layerTiles[tY][tX] = staticTile;
+                    }
                 }
             }
 
