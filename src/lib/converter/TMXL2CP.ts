@@ -34,6 +34,8 @@ export default class TMXL2CP extends BaseConverter {
         super(manifest, files, 'platonymous.tmxloader', 'TMXL2CP')
     }
 
+    private _hasRun: boolean = false;
+
     convert() {
         return new Promise<string | null>(async resolve => {
             const uid = this.manifest.UniqueID
@@ -46,7 +48,7 @@ export default class TMXL2CP extends BaseConverter {
             'Unreadable content.json selected!') as any | null | undefined
             if (!content ) return null
 
-            const customMapNames = []
+            const customMapNames: string[] = []
 
             if (content.festivalSpots) {
                 for (const spot of content.festivalSpots) {
@@ -223,7 +225,7 @@ export default class TMXL2CP extends BaseConverter {
                         
                         console.log('tbin', file.name, tbin, buf, Array.from(new Uint8Array(buf.slice(0, 4))).map(e => '0x' + e.toString(16)))
                         const bytes = new Uint8Array(buf)
-                        const s_tmx = await getTmxFromTbin(bytes)
+                        const s_tmx = await getTmxFromTbin(bytes, customMapNames)
                         
                         const tmx = new File([new Blob([s_tmx], { type: "" })],
                             file.name.replace(/tbin$/, 'tmx'), {
@@ -246,8 +248,89 @@ export default class TMXL2CP extends BaseConverter {
                 }
             }
 
+            // console.log(Array.from(tbinInstances.keys()))
+            // console.log('AAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAA\nAAAAAAAAAAAAAAAAAA\n')
+            // console.log(this.files.map(f => f.name))
+
+            if (content.mergeMaps) {
+                for (const map of content.mergeMaps) {
+            //         lastElement = map["file"].split("/")[-1]
+            // mapPath = f'CP/assets/{lastElement.replace(".tbin", ".tmx")}'
+            // wh = tiled.getMapWidthHeight(mapPath)
+                    const lastElement = map.file.split('/').at(-1)
+                    const fromFileInstance =  tbinInstances.entries().find(([k ,v], i) => lastElement.replace('.tmx', '.tbin') == k)
+                    if (!fromFileInstance || !fromFileInstance[1]) {
+                        console.warn(`failed mergemap to {${map.name}} - couldnt get tbin instance for ${lastElement}`)
+                        continue;
+                    }
+                    
+                    const wh = [fromFileInstance[1].tiles?.layers[0].widthTiles, fromFileInstance[1].tiles?.layers[0].heightTiles]
+                    
+                    if ('condition' in map) {
+                        console.warn(`[WARN] CONDITION IGNORED FOR ${map.name} PATCH FROM ${map.file}`)
+                        logOutput(`[WARN] CONDITION IGNORED FOR ${map.name} PATCH FROM ${map.file}`)
+                    }
+
+                    const editMap: any = {
+                        Action: "EditMap",
+                        Target : `Maps/${map.name}`,
+                        FromArea: {
+                            X: map.sourceArea ? map.sourceArea[0] : 0,
+                            Y: map.sourceArea ? map.sourceArea[1] : 0,
+                        },
+                        ToArea: {
+                            X: map.position ? map.position[0] : 0,
+                            Y: map.position ? map.position[1] : 0,
+                            Width: Math.floor(wh[0] ?? 0),
+                            Height: Math.floor(wh[1] ?? 0)
+                        },
+                    }
+
+                    if (map.sourceArea) {
+                        editMap.FromArea.Width = map.sourceArea[2]
+                        editMap.FromArea.Height = map.sourceArea[3]
+                    } else {
+                        editMap["FromArea"]["Width"] = Math.floor(wh[0] ?? 0)
+                        editMap["FromArea"]["Height"] = Math.floor(wh[1] ?? 0)
+                    }
+
+                    try {
+                        if (map.removeEmpty == true)
+                            editMap["PatchMode"] = 'Replace'
+                        else if (map.removeEmpty == false)
+                            editMap["PatchMode"] = 'Overlay'
+                    } catch {
+                        editMap["PatchMode"] = 'Overlay'
+                    }
+                    
+                    editMap["FromFile"] = `assets/${lastElement.replace(".tbin", ".tmx")}`
+                    this.outputContent.Changes.push(editMap)
+
+                    try {
+                        if (map.addWarps) {
+                            const warps: any = {
+                                Action: 'EditMap',
+                                Target: customMapNames.includes(map.name) ? `Maps/Custom_${map.name}` : `Maps/${map.name}`,
+                            }
+
+                            const warpList = map.addWarps.slice(0, 5);
+                            const warpList2 = warpList.map((warp: any) => {
+                                const warpName: string = warp.split(" ")[2];
+                                if (customMapNames.includes(warpName)) {
+                                    warp = warp.replace(warpName, `Custom_${warpName}`);
+                                }
+                                return warp;
+                            });
+
+                            warps.addWarps = warpList2;
+                            this.outputContent.Changes.push(warps);
+                        }
+                    } catch {}
+                }
+            }
+
             const zip = new JSZip()
-            const folderName = this.files.find(x => x.name == 'manifest.json')!.webkitRelativePath.split('/')[0].replace('[BFAV]', '[CP]')
+            const folderName = this.files.find(x => x.name == 'manifest.json')!.webkitRelativePath.split('/')[0].replace('[TMX]', '[CP]').replace('[TMXL]', 'CP')
             
             zip.file<'string'>(`${folderName}/content.json`, JSON.stringify(this.outputContent, null, 4))
             zip.file<'string'>(`${folderName}/manifest.json`, JSON.stringify(this.outputManifest, null, 4))
@@ -256,7 +339,7 @@ export default class TMXL2CP extends BaseConverter {
                 const buf = await file.arrayBuffer()
                 console.log(file, buf, file.webkitRelativePath || (file as any)._path)
                 //@ts-ignore
-                zip.file<'arraybuffer'>((file.webkitRelativePath || file._path).replace('[BFAV]', '[CP]'), buf)
+                zip.file<'arraybuffer'>((file.webkitRelativePath || file._path).replace('[TMX]', '[CP]').replace('[TMXL]', 'CP'), buf)
                 // console.log(path, folderName, buf)
             }
 
@@ -266,6 +349,7 @@ export default class TMXL2CP extends BaseConverter {
 
             logOutput('Converted ' + this.manifest.Name)
 
+            this._hasRun = true // to prevent rerunning since that doesnt go great for computer
             resolve('data:application/zip;base64,' + exported)
         })
     }

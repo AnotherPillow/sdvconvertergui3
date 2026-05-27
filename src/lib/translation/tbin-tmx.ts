@@ -7,7 +7,7 @@ import { tBINTileProperty, tBINTilesheet, tBINTilesheets } from "$lib/external/t
 import TBIN from "../extern/tbin/src/build/tbin";
 import { tBIN as tBIN_js } from '../external/tbin/src/index'
 
-export default async function getTmxFromTbin(bytes: Uint8Array): Promise<string> {
+export default async function getTmxFromTbin(bytes: Uint8Array, customMapNames: string[]): Promise<string> {
     const mod = await TBIN() as any
 
     if (!mod.FS.analyzePath("/data").exists) {
@@ -294,6 +294,7 @@ export default async function getTmxFromTbin(bytes: Uint8Array): Promise<string>
                     const t = tY * layer.widthTiles + tX;
                     layerTiles[tY][tX] = null
                     
+                    // commented because pretty sure causing perf issues
                     console.log(`getting tile index for tile ${t} on layer ${i}`)
                     const tileIndex = mod.ccall(
                         "map_layer_tile_get_index",
@@ -302,10 +303,10 @@ export default async function getTmxFromTbin(bytes: Uint8Array): Promise<string>
                         [mapPtr, i, t]
                     );
                     
-                    console.log(`getting tilesheet name for tile ${t} on layer ${i}`)
+                    // console.log(`getting tilesheet name for tile ${t} on layer ${i}`)
                     const tileSheet = getValue('map_layer_get_name', 'number', ['number', 'number', 'number'], [mapPtr, i, t])
 
-                    console.log(`getting blend mode for tile ${t} on layer ${i}`)
+                    // console.log(`getting blend mode for tile ${t} on layer ${i}`)
                     const blendMode = mod.ccall(
                         "map_layer_tile_get_blend_mode",
                         "number",
@@ -327,7 +328,33 @@ export default async function getTmxFromTbin(bytes: Uint8Array): Promise<string>
         }
     }
 
-    console.log(tbjs)
+
+    // rewriting properties
+    tbjs.properties.all().forEach(key => {
+        console.log(`map property on ${tbjs.meta?.selfMapName}: ${key}`)
+        // i think actions are tiledata maybe? not sure how to do that. not sure if i can do that. need to figure that out.
+        if (key == 'Warp') {
+            const value = tbjs.properties?.get(key)
+            if (!value) return;
+
+            const warpsSplit = value.split(" ");
+            const warps = [];
+
+            for (let i = 0; i < warpsSplit.length; i += 5) {
+                warps.push(warpsSplit.slice(i, i + 5));
+            }
+
+            tbjs.properties?.set(key, warps
+                .map((w) => {
+                    if (customMapNames.includes(w[2])) {
+                        w[2] = `Custom_${w[2]}`;
+                    }
+                    return w.join(" ");
+                })
+                .join(" ")
+            )
+        }
+    })
 
     return tbjs.export('tmx');
 }
