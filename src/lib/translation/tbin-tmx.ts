@@ -314,9 +314,10 @@ export default async function getTmxFromTbin(bytes: Uint8Array, customMapNames: 
                         [mapPtr, i, t]
                     );
 
-                    if (tileSheet == "" || tileSheet.startsWith('_')) console.warn(`failed to get tilesheet for ${t} on ${i} (${layer.name}) - received '${tileSheet}'`)
+                    // null tiles are just empty im pretty sure!
+                    // if (tileSheet == "" || tileSheet.startsWith('_')) console.warn(`failed to get tilesheet for ${t} on ${i} (${layer.name}) - received '${tileSheet}'`)
 
-                    if (tileIndex != -1) layerTiles[tY][tX] = new tBINStaticTile(tileIndex, blendMode, tileSheet)
+                    if (tileIndex != -1 && tileSheet) layerTiles[tY][tX] = new tBINStaticTile(tileIndex, blendMode, tileSheet)
                 }
             }
 
