@@ -2,7 +2,7 @@
 
 import { tBINMeta } from "$lib/external/tbin/src/parsers/metadata";
 import { tBINProperties } from "$lib/external/tbin/src/parsers/properties";
-import { tBINLayer, tBINTiles } from "$lib/external/tbin/src/parsers/tiles";
+import { tBINLayer, tBINStaticTile, tBINTile, tBINTiles } from "$lib/external/tbin/src/parsers/tiles";
 import { tBINTileProperty, tBINTilesheet, tBINTilesheets } from "$lib/external/tbin/src/parsers/tilesheets";
 import TBIN from "../extern/tbin/src/build/tbin";
 import { tBIN as tBIN_js } from '../external/tbin/src/index'
@@ -285,6 +285,41 @@ export default async function getTmxFromTbin(bytes: Uint8Array): Promise<string>
             layer.properties = layerProperties
 
             // layer.tiles
+
+            const layerTiles: (tBINTile | null)[][] = []
+
+            for (let tY = 0; tY < layer.heightTiles; tY++) {
+                layerTiles[tY] = []
+                for (let tX = 0; tX < layer.widthTiles; tX++) {
+                    const t = tY * layer.widthTiles + tX;
+                    layerTiles[tY][tX] = null
+                    
+                    console.log(`getting tile index for tile ${t} on layer ${i}`)
+                    const tileIndex = mod.ccall(
+                        "map_layer_tile_get_index",
+                        "number",
+                        ["number", "number", "number"],
+                        [mapPtr, i, t]
+                    );
+                    
+                    console.log(`getting tilesheet name for tile ${t} on layer ${i}`)
+                    const tileSheet = getValue('map_layer_get_name', 'number', ['number', 'number', 'number'], [mapPtr, i, t])
+
+                    console.log(`getting blend mode for tile ${t} on layer ${i}`)
+                    const blendMode = mod.ccall(
+                        "map_layer_tile_get_blend_mode",
+                        "number",
+                        ["number", "number", "number"],
+                        [mapPtr, i, t]
+                    );
+
+                    if (tileSheet == "") console.warn(`failed to get tilesheet for ${t} on ${i} (${layer.name}) - received an empty string`)
+
+                    if (tileIndex != -1) layerTiles[tY][tX] = new tBINStaticTile(tileIndex, blendMode, tileSheet)
+                }
+            }
+
+            layer.tiles = layerTiles
 
             tbjs.tiles.layers.push(layer)
         } catch (e) {
