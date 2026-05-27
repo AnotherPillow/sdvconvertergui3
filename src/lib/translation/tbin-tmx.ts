@@ -304,7 +304,7 @@ export default async function getTmxFromTbin(bytes: Uint8Array, customMapNames: 
                     );
                     
                     // console.log(`getting tilesheet name for tile ${t} on layer ${i}`)
-                    const tileSheet = getValue('map_layer_get_name', 'number', ['number', 'number', 'number'], [mapPtr, i, t])
+                    const tileSheet = getValue('map_layer_tile_get_tilesheet', 'number', ['number', 'number', 'number'], [mapPtr, i, t])
 
                     // console.log(`getting blend mode for tile ${t} on layer ${i}`)
                     const blendMode = mod.ccall(
@@ -314,7 +314,7 @@ export default async function getTmxFromTbin(bytes: Uint8Array, customMapNames: 
                         [mapPtr, i, t]
                     );
 
-                    if (tileSheet == "") console.warn(`failed to get tilesheet for ${t} on ${i} (${layer.name}) - received an empty string`)
+                    if (tileSheet == "" || tileSheet.startsWith('_')) console.warn(`failed to get tilesheet for ${t} on ${i} (${layer.name}) - received '${tileSheet}'`)
 
                     if (tileIndex != -1) layerTiles[tY][tX] = new tBINStaticTile(tileIndex, blendMode, tileSheet)
                 }
