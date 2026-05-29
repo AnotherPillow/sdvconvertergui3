@@ -3,6 +3,7 @@ import BFAV2CP from "./converter/BFAV2CP";
 import CM2CP from "./converter/CM2CP";
 import MTN2CP from "./converter/MTN2CP";
 import TMXL2CP from "./converter/TMXL2CP";
+import CPA2SC from "./converter/CPA2SC";
 import type { Manifest } from "./types";
 
 interface Converter {
@@ -15,7 +16,7 @@ interface Converter {
 	RequirementsFile: string;
 	SupportedUniqueID: string;
 	ExtraArgs: string;
-    Convert?: typeof TMXL2CP | typeof BFAV2CP | typeof CM2CP | typeof MTN2CP;
+    Convert?: typeof TMXL2CP | typeof BFAV2CP | typeof CM2CP | typeof MTN2CP | typeof CPA2SC;
 }
 
 export default [
@@ -98,6 +99,7 @@ export default [
         OutputDirectory:   "output",        RequirementsFile:  "requirements.txt",
         SupportedUniqueID: "pathoschild.contentpatcher",
         ExtraArgs:         "",
+        Convert:           CPA2SC
     },
     
     {

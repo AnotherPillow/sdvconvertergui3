@@ -44,7 +44,7 @@ export default class CM2CP extends BaseConverter {
             })       
 
             const zip = new JSZip()
-            const folderName = this.files.find(x => x.name == 'manifest.json')!.webkitRelativePath.split('/')[0].replace('[BFAV]', '[CP]')
+            const folderName = this.files.find(x => x.name == 'manifest.json')!.webkitRelativePath.split('/')[0].replace('[CM]', '[CP]')
             
             zip.file<'string'>(`${folderName}/content.json`, JSON.stringify(this.outputContent, null, 4))
             zip.file<'string'>(`${folderName}/manifest.json`, JSON.stringify(this.outputManifest, null, 4))
@@ -52,7 +52,7 @@ export default class CM2CP extends BaseConverter {
             for (const file of this.files.filter(x => x.name != 'content.json' && x.name != 'manifest.json')) {
                 
                 const buf = await file.arrayBuffer()
-                zip.file<'arraybuffer'>(file.webkitRelativePath.replace('[BFAV]', '[CP]'), buf)
+                zip.file<'arraybuffer'>(file.webkitRelativePath.replace('[CM]', '[CP]'), buf)
                 // console.log(path, folderName, buf)
             }
 

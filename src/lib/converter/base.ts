@@ -4,7 +4,7 @@ export default class BaseConverter {
     public outputContent = {
         "Format": "2.0",
         "Changes": [] as any[]
-    }
+    } as {Format: string, Changes: any[], ConfigSchema?: any, DynamicTokens?: any}
     public outputManifest: Manifest
 
     constructor(public manifest: Manifest, public files: File[], public oldFrameworkUID: string, public newFrameworkUID: string, public converterName: string) {
