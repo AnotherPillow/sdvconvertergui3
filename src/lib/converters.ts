@@ -5,6 +5,7 @@ import MTN2CP from "./converter/MTN2CP";
 import TMXL2CP from "./converter/TMXL2CP";
 import CPA2SC from "./converter/CPA2SC";
 import type { Manifest } from "./types";
+import SAAT2CP from "./converter/SAAT2CP";
 
 interface Converter {
     Name: string;
@@ -16,7 +17,7 @@ interface Converter {
 	RequirementsFile: string;
 	SupportedUniqueID: string;
 	ExtraArgs: string;
-    Convert?: typeof TMXL2CP | typeof BFAV2CP | typeof CM2CP | typeof MTN2CP | typeof CPA2SC;
+    Convert?: typeof TMXL2CP | typeof BFAV2CP | typeof CM2CP | typeof MTN2CP | typeof CPA2SC | typeof SAAT2CP;
 }
 
 export default [
@@ -111,6 +112,7 @@ export default [
         OutputDirectory:   "output",        RequirementsFile:  "requirements.txt",
         SupportedUniqueID: "zerometers.saat.mod",
         ExtraArgs:         "",
+        Convert:           SAAT2CP,
     },
     
     {
