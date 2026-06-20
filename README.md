@@ -1,5 +1,5 @@
 <p align="center">
-    <image src="src/static/favicon.png">
+    <image src="static/favicon.png">
     <h1>sdvconvertergui3</h1>
 </p>
 
