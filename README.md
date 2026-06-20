@@ -36,3 +36,4 @@ Tbin parsing is using [a fork](https://github.com/AnotherPillow/Tbin/tree/emscri
 ![main before usage](./readme-assets/main-pre-use.png)
 ![main after converting stardew expansion with tmxl2cp](./readme-assets/main-post-tmxl2cp.png)
 ![the dropdown of converter options](./readme-assets/converter-dropdown.png)
+![left column with seperator](./readme-assets/left-col-prettier.png)

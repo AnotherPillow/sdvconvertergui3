@@ -7,6 +7,7 @@
     import converters from '../lib/converters'
     import { objectToArray } from '../util';
     import { onMount } from 'svelte';
+    import CornerLinks from '../components/CornerLinks.svelte';
 
     let _sendToast: typeof window.SendToast = null as unknown as typeof window.SendToast;
 
@@ -18,6 +19,7 @@
 
 <StardewStyleToast bind:SendToast={_sendToast}/>
 <Blurrer />
+<CornerLinks />
 
 <main>
     <Main />

@@ -1,3 +1,5 @@
+<!-- stolen from https://github.com/AnotherPillow/XNB2CP/blob/main/src/index.scss#L78-L89 -->
+ 
 <script lang="ts"></script>
 
 <div class="horizontal-border"></div>
