@@ -6,6 +6,7 @@
     import { ConvertMod } from '$lib/conversion';
     import type { Manifest } from '$lib/types';
     import { downloadFile } from '../util';
+    import HorizontalSeperator from './HorizontalSeperator.svelte';
 
     let selectedConverter = '';
     let selectedManifest: Manifest | null = null;
@@ -60,6 +61,9 @@
 <div id="columns">
     <div class="column col-right">
         <UploadFiles bind:selectedManifest={selectedManifest} bind:selectedFiles={selectedFiles} />
+        
+        <HorizontalSeperator />
+
         <button id="convert-btn" on:click={convertMod}>
             <img src="/images/convert_btn.png" alt="convert" id="convert-img" />
         </button>
