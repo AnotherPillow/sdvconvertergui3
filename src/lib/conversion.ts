@@ -12,7 +12,9 @@ export const ConvertMod = (manifest: Manifest, files: File[], converterName: str
         const instance = new converter.Convert!(manifest, files)
         if (!instance) return resolve('error|Failed to convert mod.')
         
-        return resolve('success|' + await instance.convert())
+        const res = await instance.convert()
+        umami.track('conversion-complete', { converter: instance.converterName });
+        return resolve('success|' + res)
 
     })
 }

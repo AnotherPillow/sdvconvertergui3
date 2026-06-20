@@ -28,12 +28,15 @@
 
         if (!manifest.Name || !manifest.Author || !manifest.UniqueID || !manifest.Description) {
             window.SendToast("Invalid manifest selected!", 2000, 100, '#f5bbb3')
+            umami.track('invalid-manifest-selected');
             return selectedManifest = null;
         } else if (!manifest?.ContentPackFor?.UniqueID) {
             window.SendToast("C# mod selected - please choose a content pack.", 5000, 100, '#f5bbb3')
+            umami.track('csharp-manifest-selected');
             return selectedManifest = null;
         }
 
+        umami.track('mod-uploaded-success');
         selectedManifest = manifest
     }
 

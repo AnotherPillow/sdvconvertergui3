@@ -24,6 +24,7 @@
     const exportMod = () => {
         window.SendToast("The converted mod's download has begun.", 2000, 200, 'rgb(168, 190, 226);')
         downloadFile(downloadFileURL, `${selectedManifest?.UniqueID}_${selectedConverter}.zip`)
+        umami.track('mod-exported', { converter: selectedConverter });
     }
 
     const convertMod = () => {

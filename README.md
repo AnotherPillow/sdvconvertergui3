@@ -1,7 +1,9 @@
-so compiling 
+# sdvconvertergui3
 
-cd src/lib/extern/tbin/src
-./build.sh
+The sequel to [sdvconvertergui2](https://github.com/anotherpillow/sdvconvertergui2)
 
-cd ../../../../..
-npm run dev
+it's web-only, so you can use it here: [https://sdvconvertergui3.pillow.rocks](https://sdvconvertergui3.pillow.rocks)
+
+## building
+
+install dependencies and `npm run full-build`
