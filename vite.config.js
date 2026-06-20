@@ -13,11 +13,11 @@ export default defineConfig({
       $img: path.resolve("./src/assets/images"),
     },
   },
-  build: {
-    rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'src/app.html'), // Adjust the path
-      },
-    },
-  },
+//   build: {
+//     rollupOptions: {
+//       input: {
+//         main: path.resolve(__dirname, 'src/app.html'), // Adjust the path
+//       },
+//     },
+//   },
 })
