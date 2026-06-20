@@ -2,7 +2,7 @@
 
 The sequel to [sdvconvertergui2](https://github.com/anotherpillow/sdvconvertergui2)
 
-it's web-only, so you can use it here: [https://sdvconvertergui3.pillow.rocks](https://sdvconvertergui3.pillow.rocks)
+it's web-only, so you can use it here: [https://converters.pillow.rocks](https://converters.pillow.rocks)
 
 ## building
 
