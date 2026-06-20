@@ -205,7 +205,7 @@ export default class MTN2CP extends BaseConverter {
                 const fp = 'Maps/' + farmMapsFileName
                 
                 this.outputContent['Changes'].push({
-                    "LogName": "set up petWaterBowl location for farm",
+                    "LogName": "set up rabbitStatue/warp totem entry location for farm",
                     "Action": "EditMap",
                     "Target": fp,
                     "MapProperties": {

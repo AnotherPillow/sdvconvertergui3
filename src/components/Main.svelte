@@ -5,7 +5,6 @@
     import UploadFiles from './UploadFiles.svelte';
     import { ConvertMod } from '$lib/conversion';
     import type { Manifest } from '$lib/types';
-    import { BadgePoundSterling } from 'lucide-svelte';
     import { downloadFile } from '../util';
 
     let selectedConverter = '';
