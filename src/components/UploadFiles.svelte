@@ -59,6 +59,8 @@
                 Choose a folder containing manifest.json
                 <br>
                 Click <a href="https://xnb.pillow.rocks">here</a> for XNB2CP.
+                <br>
+                A usage guide can be found <a href="https://github.com/AnotherPillow/sdvconvertergui3#usage" target="_blank">here</a>.
             {:else}
                 {selectedManifest.Name}
             {/if}

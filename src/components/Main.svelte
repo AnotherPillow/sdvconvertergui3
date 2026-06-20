@@ -59,7 +59,6 @@
 <h1 class="title m-0">sdvconvertergui3</h1>
 <div id="columns">
     <div class="column col-right">
-        <!-- <h3 class="selected-mod-name"> -->
         <UploadFiles bind:selectedManifest={selectedManifest} bind:selectedFiles={selectedFiles} />
         <button id="convert-btn" on:click={convertMod}>
             <img src="/images/convert_btn.png" alt="convert" id="convert-img" />
@@ -92,43 +91,6 @@
         line-height: 20px;
         margin: 1.5rem auto;
     }
-
-    /*.input-box .btn {
-        width: 60px;
-        height: 30px;
-        line-height: 30px;
-        border-radius: 3px;
-        border: none;
-        margin: 0 0 0 20px;
-        padding: 0 8px;
-        cursor: pointer;
-    }
-
-    .input-box .btn:hover {
-        background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
-        color: #333333;
-    }
-
-    .input-box .input {
-        border: none;
-        border-radius: 3px;
-        outline: none;
-        height: 30px;
-        line-height: 30px;
-        padding: 0 10px;
-        background-color: rgba(240, 240, 240, 1);
-        -webkit-font-smoothing: antialiased;
-    }
-
-    .input-box .input:hover {
-        border: none;
-        background-color: rgba(255, 255, 255, 1);
-    }
-
-    .input-box .input:focus {
-        border: none;
-        background-color: rgba(255, 255, 255, 1);
-    }*/
 
     #columns {
         display: flex;
