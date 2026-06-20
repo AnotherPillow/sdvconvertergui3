@@ -70,28 +70,30 @@ export default [
         Convert:           STF2CP,
     },
     
-    {
-        Name:              "FurnitureConverter",
-        Needs16:           false,
-        Repo:              "https://github.com/elizabethcd/FurnitureConverter",
-        GitFile:           "https://github.com/elizabethcd/FurnitureConverter.git",
-        InputDirectory:    "input",
-        OutputDirectory:   "output-1.6",
-        RequirementsFile:  "requirements.txt",
-        SupportedUniqueID: "platonymous.customfurniture",
-        ExtraArgs:         "--inputDir input --outputDir output",
-    },
+    // they're way too much effort to do lol so nope
+
+    // {
+    //     Name:              "FurnitureConverter",
+    //     Needs16:           false,
+    //     Repo:              "https://github.com/elizabethcd/FurnitureConverter",
+    //     GitFile:           "https://github.com/elizabethcd/FurnitureConverter.git",
+    //     InputDirectory:    "input",
+    //     OutputDirectory:   "output-1.6",
+    //     RequirementsFile:  "requirements.txt",
+    //     SupportedUniqueID: "platonymous.customfurniture",
+    //     ExtraArgs:         "--inputDir input --outputDir output",
+    // },
     
-    {
-        Name:              "CP2AT",
-        Needs16:           false,
-        Repo:              "https://github.com/holy-the-sea/CP2AT",
-        GitFile:           "https://github.com/holy-the-sea/CP2AT.git",
-        InputDirectory:    "input",
-        OutputDirectory:   "output",        RequirementsFile:  "requirements.txt",
-        SupportedUniqueID: "pathoschild.contentpatcher",
-        ExtraArgs:         "",
-    },
+    // {
+    //     Name:              "CP2AT",
+    //     Needs16:           false,
+    //     Repo:              "https://github.com/holy-the-sea/CP2AT",
+    //     GitFile:           "https://github.com/holy-the-sea/CP2AT.git",
+    //     InputDirectory:    "input",
+    //     OutputDirectory:   "output",        RequirementsFile:  "requirements.txt",
+    //     SupportedUniqueID: "pathoschild.contentpatcher",
+    //     ExtraArgs:         "",
+    // },
     
     {
         Name:              "CPA2SC",
