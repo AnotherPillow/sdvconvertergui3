@@ -87,7 +87,7 @@
 
     #file-uploader-area {
         cursor: pointer;
-        width: max-content;
+        width: 100%;
         color: var(--main-color);
 
         align-items: center;

@@ -99,26 +99,26 @@
     #columns {
         display: flex;
         justify-content: space-between;
-        align-items: center;
-
-        height: data.$available-col-height;
+        align-items: flex-start;
+        flex-wrap: wrap;
 
         gap: 20px;
 
         .col-right {
-            justify-content: space-evenly
+            justify-content: space-evenly;
         }
 
         .column {
-            width: 50%;
-            height: calc(100% - 60px);
-            
+            flex: 1 1 300px;
+            min-width: 0;
+            min-height: 60vh;
+
             padding: 1em;
 
             display: flex;
             position: relative;
             flex-direction: column;
-            
+
             align-items: center;
 
             @include data.border_image(12px, "../");

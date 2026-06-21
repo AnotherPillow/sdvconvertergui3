@@ -39,14 +39,15 @@
     @use "../data";
 
     #sdv-style-toast-container {
-        min-width: 100vw;
-        min-height: 100vh;
+        // min-width: 100vw;
+        // min-height: 100vh;
 
         position: absolute;
         inset: 0;
         z-index: 100;
 
         pointer-events: none;
+        overflow: hidden;
 
         #sdv-style-toast {
             $width: 15em;

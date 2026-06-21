@@ -33,8 +33,10 @@
         z-index: 4;
 
         width: var(--main-width);
-        height: var(--main-height);
+        min-height: var(--main-height); 
+        height: auto;
 
+        background-clip: padding-box;
         background-color: wheat;
         padding: 30px;
 
@@ -44,4 +46,5 @@
 
         @include data.border_image;
     }
+
 </style>

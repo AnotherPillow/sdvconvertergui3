@@ -37,19 +37,18 @@
 
     .credits-overlay {
         z-index: 10;
-        position: absolute;
-        width: 100vw;
-        height: 100vh;
+        position: fixed;
+        inset: 0;
         pointer-events: none;
 
         a {
             text-decoration: none;
             color: inherit;
             cursor: pointer;
-            pointer-events: all; 
-    
+            pointer-events: all;
+
             position: absolute;
-            bottom: -1.5rem;
+            bottom: -2.5rem;
             left: -1.5rem;
         }
     }

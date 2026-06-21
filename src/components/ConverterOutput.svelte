@@ -9,7 +9,7 @@
     @use "../data";
 
     textarea {
-        height: 70%;
+        flex-grow: 1;
         min-height: 2em;
         width: 90%;
         
