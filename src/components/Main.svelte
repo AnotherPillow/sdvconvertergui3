@@ -57,7 +57,9 @@
 
 </script>
 
-<h1 class="title m-0">sdvconvertergui3</h1>
+<div id="title-region">
+    <h1 class="title m-0">sdvconvertergui3</h1>
+</div>
 <div id="columns">
     <div class="column col-right">
         <UploadFiles bind:selectedManifest={selectedManifest} bind:selectedFiles={selectedFiles} />

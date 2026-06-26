@@ -3,6 +3,7 @@
     import Main from '../components/Main.svelte';
     import StardewStyleToast from '../components/StardewStyleToast.svelte';
     import '../styles.scss'
+    import '../app.pcss'
 
     import converters from '../lib/converters'
     import { objectToArray } from '../util';
