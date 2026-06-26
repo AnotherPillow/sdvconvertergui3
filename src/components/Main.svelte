@@ -58,7 +58,7 @@
 </script>
 
 <div id="title-region">
-    <h1 class="title m-0">sdvconvertergui3</h1>
+    <h1 class="title">sdvconvertergui3</h1>
 </div>
 <div id="columns">
     <div class="column col-right">
@@ -147,5 +147,10 @@
     #hidden-download-links {
         display: none;
 
+    }
+
+    #title-region {
+        display: flex;
+        flex-direction: column;
     }
 </style>
