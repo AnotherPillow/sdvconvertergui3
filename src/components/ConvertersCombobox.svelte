@@ -68,7 +68,7 @@
                 {#each converters as framework}
                     <Command.Item
                         value={framework.Name}
-                        class={`text-lg pl-4 converter-item ${framework.Name == selectedValue ? 'bg-sdv_dropdown_unsel' : ''}`}
+                        class={`text-2xl leading-none text-center converter-item ${framework.Name == selectedValue ? 'bg-sdv_dropdown_unsel' : ''}`}
                         onSelect={handleCheckTyper((currentValue) => {
                             value = currentValue;
                             closeAndFocusTrigger(ids.trigger);

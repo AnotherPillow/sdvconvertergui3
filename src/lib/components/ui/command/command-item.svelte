@@ -10,7 +10,7 @@
 	{asChild}
     aria-selected="false"
 	class={cn(
-		"aria-selected:bg-sdv_dropdown_unsel relative flex cursor-default select-none items-center  px-2 py-1.5 text-sm outline-none  aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",// rounded-sm
+		"aria-selected:bg-sdv_dropdown_unsel cursor-default select-none items-center text-sm outline-none  aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",// rounded-sm
 		className
 	)}
 	{...$$restProps}
