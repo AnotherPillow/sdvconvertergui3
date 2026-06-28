@@ -27,14 +27,14 @@
             <div class="grid gap-4">
                 <div class="grid gap-3">
                     <Label for="name-1">Name</Label>
-                    <Input id="name-1" name="name" value="Pedro Duarte" />
+                    <Input id="name-1" name="name" value="Pedro Duarte"  class="w-[unset]" />
                 </div>
                 <div class="grid gap-3">
                     <Label for="username-1">Username</Label>
-                    <Input id="username-1" name="username" value="@peduarte" />
+                    <Input id="username-1" name="username" value="@peduarte" class="w-[unset]" />
                 </div>
             </div>
-            <Dialog.Footer>
+            <!-- <Dialog.Footer>
                 <Dialog.Close
                     type="button"
                     class={buttonVariants({ variant: "outline" })}
@@ -42,13 +42,18 @@
                     Cancel
                 </Dialog.Close>
                 <Button type="submit">Save changes</Button>
-            </Dialog.Footer>
+            </Dialog.Footer> -->
         </form>
     </Dialog.Content>
 </Dialog.Root>
 
 <style lang="scss">
+    @use "../data";
+
     :global(.sdv-dialog) {
         background-color: wheat;
+        @include data.border_image(12px, "../");
+
+
     }
 </style>
