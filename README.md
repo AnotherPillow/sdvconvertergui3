@@ -30,8 +30,7 @@ it's web-only, so you can use it here: [https://converters.pillow.rocks](https:/
 All converters are used with permission, and the original authors can be found above.
 The main background image is used with permission from [Custom Menu Background](https://www.nexusmods.com/stardewvalley/mods/7416).
 
-Tbin parsing is using [a fork](https://github.com/AnotherPillow/Tbin/tree/
-emscripten) of kittycatcasey's [Tbin](https://github.com/spacechase0/Tbin) library, licensed under the MIT license.
+Tbin parsing is using [a fork](https://github.com/AnotherPillow/Tbin/tree/emscripten) of kittycatcasey's [Tbin](https://github.com/spacechase0/Tbin) library, licensed under the MIT license.
 
 [the xnb icon](./static/images/xnb_btn.png) is made by [aviroen](https://aviroen.gay)
 
