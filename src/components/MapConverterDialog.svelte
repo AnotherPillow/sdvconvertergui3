@@ -5,6 +5,13 @@
     import { Input } from "../lib/components/ui/input/index.js";
     import { Label } from "../lib/components/ui/label/index.js";
     
+    let selectedFile: FileList = new FileList()
+    let finishedOutput: string | null = null // will be a data: url
+
+    const doConversion = () => {
+
+    }
+
 </script>
 
 <Dialog.Root>
@@ -17,22 +24,26 @@
         <slot />
     </Dialog.Trigger>
     <Dialog.Content class="sm:max-w-[425px] sdv-dialog">
-        <form>
+        <form class="bg-[wheat]" on:submit={doConversion}>
             <Dialog.Header>
-                <Dialog.Title>Convert .tBIN files to .tmx files</Dialog.Title>
+                <Dialog.Title class="text-xl m-0">Convert .tBIN files to .tmx files</Dialog.Title>
                 <Dialog.Description>
                     Converts maps using the same code TMXL2CP does. It won't be perfect
                 </Dialog.Description>
             </Dialog.Header>
             <div class="grid gap-4">
-                <div class="grid gap-3">
-                    <Label for="name-1">Name</Label>
-                    <Input id="name-1" name="name" value="Pedro Duarte"  class="w-[unset]" />
+                <div class="flex gap-3 justify-center items-center parent-of-tbin-input py-2 rounded-sm transition-colors">
+                    <Label for="input-tbin" class="inline w-fit">.tBIN file:</Label>
+                    <input id="input-tbin" name="input-tbin" type="file" class="inline w-60" required bind:files={selectedFile}>
                 </div>
-                <div class="grid gap-3">
+                <div class="grid gap-3 justify-center">
+                    <button id="map-convert-btn" type="submit" class="w-fit border-none outline-none bg-transparent cursor-pointer mx-auto">
+                        <img src="/images/convert_btn.png" alt="convert" id="convert-img" width="117" height="39" class="clickable"/>
+                    </button>
+                <!-- <div class="grid gap-3">
                     <Label for="username-1">Username</Label>
                     <Input id="username-1" name="username" value="@peduarte" class="w-[unset]" />
-                </div>
+                </div> -->
             </div>
             <!-- <Dialog.Footer>
                 <Dialog.Close
@@ -53,7 +64,11 @@
     :global(.sdv-dialog) {
         background-color: wheat;
         @include data.border_image(12px, "../");
+    }
 
-
+    .parent-of-tbin-input {
+        &:has(:user-invalid) {
+            background-color: rgb(248, 154, 154);
+        }
     }
 </style>
