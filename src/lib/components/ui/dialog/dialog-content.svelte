@@ -5,7 +5,10 @@
 	import { cn, flyAndScale } from "$lib/utils";
 	let className = undefined;
 	export let transition = flyAndScale;
-	export let transitionConfig = {
+    /**
+     * @type {any}
+     */
+    export let transitionConfig = {
 		duration: 200,
 	};
 	export { className as class };

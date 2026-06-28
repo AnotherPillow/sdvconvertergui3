@@ -16,13 +16,12 @@
     >
         <slot />
     </Dialog.Trigger>
-    <Dialog.Content class="sm:max-w-[425px]">
+    <Dialog.Content class="sm:max-w-[425px] sdv-dialog">
         <form>
             <Dialog.Header>
-                <Dialog.Title>Edit profile</Dialog.Title>
+                <Dialog.Title>Convert .tBIN files to .tmx files</Dialog.Title>
                 <Dialog.Description>
-                    Make changes to your profile here. Click save when
-                    you're done.
+                    Converts maps using the same code TMXL2CP does. It won't be perfect
                 </Dialog.Description>
             </Dialog.Header>
             <div class="grid gap-4">
@@ -47,3 +46,9 @@
         </form>
     </Dialog.Content>
 </Dialog.Root>
+
+<style lang="scss">
+    :global(.sdv-dialog) {
+        background-color: wheat;
+    }
+</style>
