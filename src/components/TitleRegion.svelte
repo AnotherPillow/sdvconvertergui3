@@ -1,10 +1,12 @@
 <script lang="ts">
+    import MapConverterDialog from "./MapConverterDialog.svelte";
+
 
 </script>
 
 <div id="title-region">
     <div class="title-flex-child">
-        <a class="styled-lightly-btn" href="https://xnb.pillow.rocks?utm_source=sdvconvertergui3">
+        <a class="styled-lightly-btn second-class-for-specificity" href="https://xnb.pillow.rocks?utm_source=sdvconvertergui3">
             <h2>
                 <!-- it made by aviroen! -->
                 <img 
@@ -22,7 +24,7 @@
         <h1 class="title">sdvconvertergui3</h1>
     </div>
     <div class="title-flex-child">
-        <button class="styled-lightly-btn">
+        <MapConverterDialog>
             <h2>
                 Convert .tBIN files
                 <img 
@@ -33,7 +35,7 @@
                     height="32"
                 />
             </h2>
-        </button>
+        </MapConverterDialog>
     </div>
 </div>
 
@@ -97,17 +99,17 @@
         }
     }
 
-    button, a {
+    button, a, :global(.styled-lightly-btn) {
         all: unset;
         display: inline-flex;
         align-items: center;
         cursor: pointer;
     }
 
-    .styled-lightly-btn {
-        cursor: pointer;
-        padding: 0 4px;
-        border-radius: 8px;
+    :global(.styled-lightly-btn.second-class-for-specificity) {
+        cursor: pointer !important;
+        padding: 0 4px !important;
+        border-radius: 8px !important;
 
         &:hover {
             filter: brightness(0.8);
