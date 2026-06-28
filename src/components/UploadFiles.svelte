@@ -45,7 +45,7 @@
     const notypecheck = (x:any)=>x;
 </script>
 
-<span id="file-uploader-area" class="flex"> 
+<span id="file-uploader-area"> 
     <label for="file-input" class="file-label" >
         <img 
             src="/images/files_btn.png"

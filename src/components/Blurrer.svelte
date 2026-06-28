@@ -14,11 +14,13 @@
         
         position: fixed;
         inset: 0;
+        // transform: scale(1.05);
 
         width: 100%;
         height: 100%;
 
         overflow: hidden;
+        --tw-ring-offset-color: transparent;
 
         background-repeat: no-repeat;
         background-size: cover;

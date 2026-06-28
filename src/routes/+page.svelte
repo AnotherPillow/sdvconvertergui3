@@ -9,6 +9,8 @@
     import { onMount } from 'svelte';
     import CornerLinks from '../components/CornerLinks.svelte';
 
+    import '../app.pcss'
+
     let _sendToast: typeof window.SendToast = null as unknown as typeof window.SendToast;
 
     onMount(() => {

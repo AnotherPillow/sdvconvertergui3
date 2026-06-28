@@ -42,7 +42,7 @@
             variant="primary"
             role="combobox"
             aria-expanded={open}
-            class="justify-between py-0 sdv-dropdown relative rounded-none sdv px-2 pr-6"
+            class="justify-between py-0 sdv-dropdown relative rounded-none sdv px-2 pr-6 text-md"
         >
             {selectedValue}
             <!-- <ChevronsUpDown class="ml-2 h-4 w-4 shrink-0 opacity-50" /> -->

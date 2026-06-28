@@ -4,13 +4,15 @@
     import * as Dialog from "../lib/components/ui/dialog/index.js";
     import { Input } from "../lib/components/ui/input/index.js";
     import { Label } from "../lib/components/ui/label/index.js";
-    import '../app.pcss'
+    
 </script>
 
 <Dialog.Root>
+
+    <!-- // having buttonVariants({ variant: "outline" }) in the trigger's classes,  as the original would makes it be a different size to the other one -->
     <Dialog.Trigger
         type="button"
-        class={cn(buttonVariants({ variant: "outline" }), "styled-lightly-btn second-class-for-specificity")}
+        class={cn("styled-lightly-btn second-class-for-specificity bg-transparent")} 
     >
         <slot />
     </Dialog.Trigger>
