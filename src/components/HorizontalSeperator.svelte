@@ -5,7 +5,7 @@
 <div class="horizontal-border"></div>
 
 <style lang="scss">
-@use "../data";
+    @use "../data";
 
     .horizontal-border {
         width: calc(100% + 32px);

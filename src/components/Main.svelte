@@ -7,6 +7,7 @@
     import type { Manifest } from '$lib/types';
     import { downloadFile } from '../util';
     import HorizontalSeperator from './HorizontalSeperator.svelte';
+    import TitleRegion from './TitleRegion.svelte';
 
     let selectedConverter = '';
     let selectedManifest: Manifest | null = null;
@@ -57,9 +58,8 @@
 
 </script>
 
-<div id="title-region">
-    <h1 class="title">sdvconvertergui3</h1>
-</div>
+<TitleRegion />
+
 <div id="columns">
     <div class="column col-right">
         <UploadFiles bind:selectedManifest={selectedManifest} bind:selectedFiles={selectedFiles} />
@@ -149,8 +149,4 @@
 
     }
 
-    #title-region {
-        display: flex;
-        flex-direction: column;
-    }
 </style>
