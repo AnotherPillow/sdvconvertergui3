@@ -10,7 +10,7 @@ it's web-only, so you can use it here: [https://converters.pillow.rocks](https:/
 ## Usage
 
 1. Visit the [page](https://converters.pillow.rocks)
-2. Select thefolder containing the `manifest.json` for the original mod you want to use.
+2. Select the folder containing the `manifest.json` for the original mod you want to use.
 3. Choose the suitable converter for that mod
 4. Press the convert button and wait for it to complete.
 5. Press the export button to download the converted, zipped mod.
@@ -29,7 +29,10 @@ it's web-only, so you can use it here: [https://converters.pillow.rocks](https:/
 
 All converters are used with permission, and the original authors can be found above.
 The main background image is used with permission from [Custom Menu Background](https://www.nexusmods.com/stardewvalley/mods/7416).
-Tbin parsing is using [a fork](https://github.com/AnotherPillow/Tbin/tree/emscripten) of kittycatcasey's [Tbin](https://github.com/spacechase0/Tbin) library, licensed under the MIT license.
+
+Tbin parsing is using [a fork](https://github.com/AnotherPillow/Tbin/tree/
+emscripten) of kittycatcasey's [Tbin](https://github.com/spacechase0/Tbin) library, licensed under the MIT license.
+
 [the xnb icon](./static/images/xnb_btn.png) is made by [aviroen](https://aviroen.gay)
 
 ## Images
